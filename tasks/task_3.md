@@ -47,7 +47,7 @@ langfuse.create_score(
 )
 ```
 
-You should see the user feedback in the UI for that session, aggregated across all traces in the conversation:
+You should see the user feedback in the UI for that session:
 
 ![Trace score in Langfuse UI](../assets/images/score_in_langfuse_ui.png)
 

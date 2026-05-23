@@ -130,12 +130,16 @@ Here's what you need to do:
 
 - Use the `observe` decorator to monitor the data loader/vector store (`embed_documents()`) and tool calls (`generate_context()`) functions. These will create their own observations.
 - Generate a unique `session_id` and `user_id` once at the start of the application (before the conversation loop begins), as shown in the example above.
-- Create a Langfuse callback handler that will be used for all LangChain invocations.
-- For each iteration of the conversation loop (each user query), use the `metadata` field to pass the session and user IDs to the LangChain invocations. There are 3 chain invocations per loop iteration:
-  - Context chain — use run name `context` and include `langfuse_session_id` and `langfuse_user_id` in metadata;
-  - Final response chain — use run name `final-response` and include the same session/user IDs in metadata;
-  - Goodbye message chain (when user exits) — use run name `goodbye-message` and include the same session/user IDs in metadata.
-- Each query will create its own trace, but all traces from the same conversation will share the same `session_id` for easy grouping in the Langfuse UI.
+- Initialize the Langfuse client using `get_client()` and create a single `CallbackHandler` instance before the conversation loop that will be reused for all LangChain invocations.
+- For each iteration of the conversation loop (each user query):
+  - Create a parent span using `langfuse.start_as_current_observation(as_type="span", name="user-query", input={"user_input": user_input})` to group all chain invocations for that query.
+  - Within the parent span, use the `propagate_attributes()` context manager to set `session_id` and `user_id` for all child observations.
+  - Inside the `propagate_attributes()` block, invoke the chains with the callback handler and appropriate run names:
+    - Context chain — use run name `context`
+    - Final response chain — use run name `final-response`
+    - Goodbye message chain (when user exits) — use run name `goodbye-message`
+  - After the chain invocations complete, update the parent span with the output using `span.update(output={"response": response.content})`.
+- Each query will create its own trace (via the parent span), but all traces from the same conversation will share the same `session_id` for easy grouping in the Langfuse UI.
 - Keep the given code mostly the same and make only the necessary additions for the above requirements.
 
 Here are some examples of what you would see in the Langfuse UI:

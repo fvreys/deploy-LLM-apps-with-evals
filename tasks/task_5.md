@@ -36,7 +36,7 @@ There are various approaches you can take to perform model-based evaluations. Fi
 docker compose up --pull always
 ```
 
-Then, add an LLM connection that will be used to run evaluations. You can do so from Project Settings> LLM Connections. Next, [set up your LLM-as-a-judge pipeline](https://langfuse.com/docs/scores/model-based-evals) from the UI:
+Then, add an LLM connection that will be used to run evaluations. You can do so from Project Settings > LLM Connections. Next, [set up your LLM-as-a-judge pipeline](https://langfuse.com/docs/evaluation/evaluation-methods/llm-as-a-judge) from the UI:
 
 ![Setting up an Evaluator](../assets/images/setting_up_an_evaluator.png)
 

@@ -15,7 +15,7 @@ Another important aspect of LLM evaluation is manual data annotation. Here, expe
 
 ### Useful Notes
 
-Langfuse allows you to easily annotate traces via the UI. Just open a trace or observation and add scores to it. You must first create a score configuration for various score types. Score configs can be updated at any time and can be archived (and restored) if you no longer want to use them in annotation. Check out [the documentation](https://langfuse.com/docs/evaluation/evaluation-methods/annotation) for more details on annotations in Langfuse.
+Langfuse allows you to easily annotate traces via the UI. Just open a trace or observation and add scores to it. You must first create a score configuration for various score types. Score configs can be updated at any time and can be archived (and restored) if you no longer want to use them in annotation. Check out [the documentation](https://langfuse.com/docs/evaluation/evaluation-methods/scores-via-ui) for more details on annotations in Langfuse.
 
 ### Development Steps
 
@@ -25,7 +25,7 @@ In this stage, we'd like to annotate the responses our LLM produces across three
 - Answer relevancy — does the response address the question?
 - Context recall — how well does the model retrieve the needed context?
 
-Here are the scores in Langfuse UI:
+Here are the scores in Langfuse UI ('Scores' section):
 ![Langfuse scores](../assets/images/langfuse_scores_annotation.png)
 
 You can always use more dimensions, but these are a nice place to start. Once you identify and annotate relevant traces, you can then add the final response observation to a [dataset](https://langfuse.com/docs/datasets/overview) for use later.
