@@ -158,14 +158,11 @@ Your code should now integrate Langfuse monitoring using both the `observe` deco
 
 ### **Useful Resources**
 
-### **Topics**
-- [Overview of Langfuse](https://hyperskill.org/learn/step/52531).
-- [Further steps of Langfuse](https://hyperskill.org/learn/step/52629).
-
 ### **Docs**
 
-- [Tracing for LangChain apps](https://langfuse.com/docs/integrations/langchain/tracing).
-- [LangChain Runnable configuration](https://python.langchain.com/api_reference/core/runnables/langchain_core.runnables.config.RunnableConfig.html).
+- [LangChain tracing integration](https://langfuse.com/docs/integrations/langchain/tracing) - Using CallbackHandler with LangChain and setting trace attributes
+- [SDK instrumentation guide](https://langfuse.com/docs/observability/sdk/instrumentation) - Using the @observe() decorator and propagate_attributes() context manager
+- [Sessions feature](https://langfuse.com/docs/observability/features/sessions) - Grouping traces together with session_id
 
 
 

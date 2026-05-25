@@ -109,15 +109,9 @@ At this point, your environment should be set up and ready for the rest of the p
 
 ### **Useful Resources**
 
-### **Topics and Projects**
-
-- [Introduction to LangChain](https://hyperskill.org/projects/514)
-- [Building the naive RAG](https://hyperskill.org/projects/518)
-- [Overview of Langfuse](https://hyperskill.org/learn/step/52531).
-- [Further steps of Langfuse](https://hyperskill.org/learn/step/52629).
-
 ### **Docs**
 
-- [Tool Calling](https://python.langchain.com/docs/concepts/tool_calling/)
-- [LangChain Messages](https://python.langchain.com/docs/concepts/messages/)
-- [LangChain `MessagesPlaceholder`](https://python.langchain.com/api_reference/core/prompts/langchain_core.prompts.chat.MessagesPlaceholder.html)
+- [Langfuse overview](https://langfuse.com/docs) - Introduction to Langfuse observability, prompt management, and evaluation features
+- [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) - Creating and using tools in LangChain
+- [LangChain messages](https://docs.langchain.com/oss/python/langchain/messages) - Understanding message types and structure in LangChain
+- [LangChain MessagesPlaceholder](https://reference.langchain.com/python/langchain-core/prompts/chat/MessagesPlaceholder) - Using MessagesPlaceholder in chat prompts for conversation history
