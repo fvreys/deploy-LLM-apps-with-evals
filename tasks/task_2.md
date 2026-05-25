@@ -99,9 +99,6 @@ def hello():
       session_id="my_session",
   ):
       print("Hello, world!")
-
-  # For trace I/O (deprecated - only for backward compat with legacy trace-level LLM-as-a-judge)
-  # langfuse.set_current_trace_io(input={"query": "..."}, output={"result": "..."})
 ```
 
 Refer to the [documentation](https://langfuse.com/docs/get-started) for more details on monitoring LangChain applications.
