@@ -105,7 +105,7 @@ Refer to the [documentation](https://langfuse.com/docs/get-started) for more det
 
 ### Development Steps
 
-In this task, we need to monitor our data loader, tool invocations, and any LLM calls. Since the application processes multiple user queries in a conversation loop, each query should create its own trace for better observability. However, we want to group all traces from the same conversation session together using a `session_id`, and identify traces by `user_id`. This allows you to see individual query performance while still being able to analyze the entire conversation session.
+In this task, we need to monitor our data loader, tool invocations, and any LLM calls. Since the application processes multiple user queries in a conversation loop, each query should create its own trace for better observability (see this [guide](https://langfuse.com/faq/all/what-does-a-good-trace-look-like#what-does-a-good-trace-look-like) for what a well-structured trace looks like). However, we want to group all traces from the same conversation session together using a `session_id`, and identify traces by `user_id`. This allows you to see individual query performance while still being able to analyze the entire conversation session.
 
 To get a unique session/user for the conversation, you can generate them once at the start of the application:
 
@@ -125,18 +125,17 @@ The same `session_id` and `user_id` should be used for all traces within that co
 
 Here's what you need to do:
 
-- Use the `observe` decorator to monitor the data loader/vector store (`embed_documents()`) and tool calls (`generate_context()`) functions. These will create their own observations.
+- Use the `@observe()` decorator to monitor the data loader/vector store (`embed_documents()`) and tool calls (`generate_context()`) functions. These will create their own observations.
 - Generate a unique `session_id` and `user_id` once at the start of the application (before the conversation loop begins), as shown in the example above.
 - Initialize the Langfuse client using `get_client()` and create a single `CallbackHandler` instance before the conversation loop that will be reused for all LangChain invocations.
 - For each iteration of the conversation loop (each user query):
-  - Create a parent span using `langfuse.start_as_current_observation(as_type="span", name="user-query", input={"user_input": user_input})` to group all chain invocations for that query.
-  - Within the parent span, use the `propagate_attributes()` context manager to set `session_id` and `user_id` for all child observations.
+  - Create a parent span using `langfuse.start_as_current_observation(as_type="span", name="user-query")` to create a single trace for that query
+  - Within the parent span, use the `propagate_attributes()` context manager to set `session_id` and `user_id` for that trace and all child observations
   - Inside the `propagate_attributes()` block, invoke the chains with the callback handler and appropriate run names:
     - Context chain — use run name `context`
     - Final response chain — use run name `final-response`
     - Goodbye message chain (when user exits) — use run name `goodbye-message`
-  - After the chain invocations complete, update the parent span with the output using `span.update(output={"response": response.content})`.
-- Each query will create its own trace (via the parent span), but all traces from the same conversation will share the same `session_id` for easy grouping in the Langfuse UI.
+- Each user query will create its own trace with all LangChain invocations as child observations, and all traces from the same conversation will share the same `session_id` for easy grouping in the Langfuse UI.
 - Keep the given code mostly the same and make only the necessary additions for the above requirements.
 
 Here are some examples of what you would see in the Langfuse UI:
