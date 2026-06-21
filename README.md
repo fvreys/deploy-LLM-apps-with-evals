@@ -137,6 +137,7 @@ Examples of changes that require documentation updates:
 - Introducing new entry points (e.g., `app.py`, `cli.py`)
 - Adding configuration files or changing how configuration is loaded
 - Creating new directories for components, utilities, or services
+
 ## **Learning Outcomes**
 
 By the end of this project, you'll build a complete evaluation pipeline for an LLM application. You'll gain hands-on experience with evaluation techniques such as analytics, human-as-a-judge, and LLM-as-a-judge. You’ll use tools like Langfuse and Ragas to supercharge LLM evaluation. This project will help you ensure that your LLM-powered app offers accurate recommendations and consistently meets high-performance and reliability standards.
@@ -183,6 +184,10 @@ Each task contains a collection of resources that will be helpful for you as you
 ## Deliverables
 
 Each task contains a set of deliverables that bring you close to achieving the final goal. The final product is a fully-monitored LLM application. You should see traces and evaluation results in Langfuse.
+
+## **Contributing**
+
+All discussions and bug reports must be done via GitHub Issues, while code review is done via GitHub Pull Requests. For more information, see the [CONTRIBUTING.md](CONTRIBUTING.md) file.        
 
 ## **The Flow**
 
