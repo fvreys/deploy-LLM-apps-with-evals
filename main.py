@@ -20,17 +20,30 @@ users = ["James", "George", "Mike", "Sherlock"]
 user_id = users[uuid.uuid4().int % len(users)]
 
 # Initialize the LLM with OpenAI API credentials (substitute for other models)
+# llm = ChatOpenAI(
+#     model=os.getenv("OPENAI_MODEL"),
+#     base_url=os.getenv("OPENAI_BASE_URL"),
+#     api_key=os.getenv("OPENAI_API_KEY")
+# )
+# Initialize the LLM with OpenAI API credentials (substitute for other models)
 llm = ChatOpenAI(
     model=os.getenv("OPENAI_MODEL"),
-    base_url=os.getenv("OPENAI_BASE_URL"),
-    api_key=os.getenv("OPENAI_API_KEY")
+    base_url=os.getenv("TINY_BASE_URL"),
+    api_key=os.getenv("TINY_API_KEY")
 )
 
 # Initialize the embeddings model with OpenAI API credentials
+# embeddings_model = OpenAIEmbeddings(
+#     model=os.getenv("OPENAI_EMBEDDINGS_MODEL"),
+#     base_url=os.getenv("OPENAI_BASE_URL"),
+#     api_key=os.getenv("OPENAI_API_KEY"),
+#     show_progress_bar=True
+# )
+# Initialize the embeddings model with OpenAI API credentials
 embeddings_model = OpenAIEmbeddings(
     model=os.getenv("OPENAI_EMBEDDINGS_MODEL"),
-    base_url=os.getenv("OPENAI_BASE_URL"),
-    api_key=os.getenv("OPENAI_API_KEY"),
+    base_url=os.getenv("TINY_BASE_URL"),
+    api_key=os.getenv("TINY_API_KEY"),
     show_progress_bar=True
 )
 
