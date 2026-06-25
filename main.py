@@ -292,8 +292,6 @@ def main():
                 break
 
             conversation.append(HumanMessage(user_input))
-            # langfuse.start_as_current_observation (as_type="span", name="user-query")
-            # langfuse_handler.on_llm_start(llm_chain=langfuse_handler, messages=[user_input])
 
             with langfuse.start_as_current_observation (
                     as_type="span",
