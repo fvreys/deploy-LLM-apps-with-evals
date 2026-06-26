@@ -278,18 +278,22 @@ def main():
         while True:
             user_input = input("User: ").strip()
             if user_input.lower() in ["exit", "quit", "bye", "end"]:
-                with propagate_attributes (session_id=session_id, user_id=user_id):
-                    # All observations created here automatically have session_id and user_id
-                    goodbye_message = goodbye_chain.invoke(
-                        {"user_id": user_id, "conversation": conversation},
-                        config = {
-                            "callbacks": [langfuse_handler],
-                            "run_name": "goodbye-message",
-                        },
-                    )
-                    root_span.update (
-                        output={"response": goodbye_message.content}
-                    )
+                with langfuse.start_as_current_observation (
+                        as_type="span",
+                        name="user-query",
+                ) as root_span:
+                    root_span.update (input=user_input)
+                    with propagate_attributes (session_id=session_id, user_id=user_id):
+                        # All observations created here automatically have session_id and user_id
+                        goodbye_message = goodbye_chain.invoke (
+                            {"user_id": user_id, "conversation": conversation},
+                            config={
+                                "callbacks": [langfuse_handler],
+                                "run_name": "goodbye-message",
+                            },
+                        )
+                    root_span.update (output={"response": goodbye_message.content})
+
                 print(f"System: {goodbye_message.content}")
                 break
 
@@ -299,9 +303,7 @@ def main():
                     as_type="span",
                     name="user-query",
             ) as root_span:
-                root_span.update(
-                    input={"query": user_input}
-                )
+                root_span.update(input={"query": user_input})
                 # Propagate session_id to all child observations
                 with propagate_attributes (session_id=session_id, user_id=user_id):
                     # All observations created here automatically have session_id and user_id
@@ -322,6 +324,7 @@ def main():
                             "run_name": "final-response",
                         },
                     )
+                root_span.update(output=response.content)
 
             print(f"System: {response.content}")
             conversation.append(response)
