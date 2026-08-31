@@ -199,3 +199,7 @@ Fork → Clone → Branch → Implement → PR → Review
 - Push the branch to the forked repo.
 - Create a Pull Request from the fork back to the main repo.
 - We will review the PR and provide feedback through GitHub.
+
+## **Tech stack**
+- Langchain
+- Qdrant
